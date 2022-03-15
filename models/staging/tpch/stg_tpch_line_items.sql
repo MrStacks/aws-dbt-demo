@@ -2,7 +2,9 @@
 
 with source as (
 
-select * from {{ source('tpch', 'lineitem') }}
+select * from {{ source('tpch', 'lineitem') }} --source tells the dbt how this model relates to that source node in the DAG
+                                            -- dbt is then able to generate that dependency graph and create a edge in the DAG from the 
+                                            -- source (the green sources) node over to my staging model node
 
 ),
 

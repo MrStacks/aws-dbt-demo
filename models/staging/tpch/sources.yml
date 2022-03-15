@@ -12,11 +12,9 @@ sources:
       - name: lineitem
         external:
           location: "s3://dbt-data-lake-538053075052/dbtworkshopdata/lineitem/"        # amazon s3 path prefix
-          row_format: >                       # Hive specification
-            serde 'org.openx.data.jsonserde.JsonSerDe'
-            with serdeproperties (
-                'strip.outer.array'='false'
-            )    
+          row_format: serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+          table_properties: "('skip.header.line.count'='1')"
+
         columns:
           - name: l_orderkey
             data_type: varchar(255)
@@ -49,11 +47,9 @@ sources:
       - name: orders
         external:
           location: "s3://dbt-data-lake-538053075052/dbtworkshopdata/orders/"        # amazon s3 path prefix
-          row_format: >                       # Hive specification
-            serde 'org.openx.data.jsonserde.JsonSerDe'
-            with serdeproperties (
-                'strip.outer.array'='false'
-            )
+          row_format: serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+          table_properties: "('skip.header.line.count'='1')"
+
         columns:
           - name: o_orderkey
             data_type: varchar(255)
